@@ -116,7 +116,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 const Text(
                   "Get Started",
                   style:
-                  TextStyle(fontSize: 20, color: Colors.white, height: 1.0),
+                      TextStyle(fontSize: 20, color: Colors.white, height: 1.0),
                 ),
                 const SizedBox(
                   height: 8,
@@ -138,7 +138,9 @@ class _WelcomePageState extends State<WelcomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MyHomePage(title: "ECG",)));
+                            builder: (context) => const MyHomePage(
+                                  title: "ECG",
+                                )));
                   },
                 ),
                 const SizedBox(
@@ -155,7 +157,75 @@ class _WelcomePageState extends State<WelcomePage> {
                   children: [
                     CustomSvgButton(
                       svgAsset: 'assets/icons/google.svg',
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              child: Container(
+                                width: 300,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF202020),
+                                  borderRadius: BorderRadius.circular(
+                                    20,
+                                  ),
+                                ),
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Text(
+                                      'Notice',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    const Text(
+                                      'This method is not available yet',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    const SizedBox(height: 20),
+                                    SizedBox(
+                                      width: double.infinity,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.white,
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 12,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context)
+                                              .pop(); // Close the dialog
+                                        },
+                                        child: const Text(
+                                          'OK',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
                       buttonWidth: 140,
                       svgWidth: 20,
                     ),
