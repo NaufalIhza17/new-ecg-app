@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ecg/components/svg_button.dart';
 import 'package:ecg/components/text_button.dart';
+import 'package:ecg/components/alert_dialog.dart';
 import 'new_home.dart';
+import 'connect.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -136,11 +138,13 @@ class _WelcomePageState extends State<WelcomePage> {
                   text: "Continue with phone",
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MyHomePage(
-                                  title: "ECG",
-                                )));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MyHomePage(
+                          title: "ECG",
+                        ),
+                      ),
+                    );
                   },
                 ),
                 const SizedBox(
@@ -148,7 +152,12 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
                 CustomTextButton(
                   text: "Continue with email",
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ConnectPage()),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 10,
@@ -161,67 +170,9 @@ class _WelcomePageState extends State<WelcomePage> {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return Dialog(
-                              child: Container(
-                                width: 300,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF202020),
-                                  borderRadius: BorderRadius.circular(
-                                    20,
-                                  ),
-                                ),
-                                padding: const EdgeInsets.all(20),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const Text(
-                                      'Notice',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    const Text(
-                                      'This method is not available yet',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.white,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    const SizedBox(height: 20),
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.white,
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 12,
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              12,
-                                            ),
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context)
-                                              .pop(); // Close the dialog
-                                        },
-                                        child: const Text(
-                                          'OK',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            return const CustomAlertDialog(
+                              title: 'Notice',
+                              message: 'This method is not available yet',
                             );
                           },
                         );
@@ -234,7 +185,17 @@ class _WelcomePageState extends State<WelcomePage> {
                     ),
                     CustomSvgButton(
                       svgAsset: 'assets/icons/apple.svg',
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const CustomAlertDialog(
+                              title: 'Notice',
+                              message: 'This method is not available yet',
+                            );
+                          },
+                        );
+                      },
                       buttonWidth: 140,
                       svgWidth: 28,
                     )
